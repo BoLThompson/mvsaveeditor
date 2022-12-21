@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mvsaveeditor/static/css/main.073c9b0a.css",
-    "main.js": "/mvsaveeditor/static/js/main.70676b41.js",
+    "main.css": "/mvsaveeditor/static/css/main.614596ef.css",
+    "main.js": "/mvsaveeditor/static/js/main.b9ba14d7.js",
     "index.html": "/mvsaveeditor/index.html",
-    "main.073c9b0a.css.map": "/mvsaveeditor/static/css/main.073c9b0a.css.map",
-    "main.70676b41.js.map": "/mvsaveeditor/static/js/main.70676b41.js.map"
+    "main.614596ef.css.map": "/mvsaveeditor/static/css/main.614596ef.css.map",
+    "main.b9ba14d7.js.map": "/mvsaveeditor/static/js/main.b9ba14d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.70676b41.js"
+    "static/css/main.614596ef.css",
+    "static/js/main.b9ba14d7.js"
   ]
 }

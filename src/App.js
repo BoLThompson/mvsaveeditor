@@ -7,6 +7,11 @@ function read8(buffer, address) {
   return view[address]
 }
 
+function read16(buffer,address) {
+  const view = new Uint16Array(buffer);
+  return view[address>>1]
+}
+
 function hprint(v,width){
   if (typeof v === "number")
   return v.toString(16).padStart(width,"0")
@@ -24,42 +29,37 @@ function checksum(buffer,start,length) {
   return val
 }
 
+function header(buffer,start) {
+  const view = new Uint16Array(buffer)
+  return(view[start>>1] << 16) | view[(start>>1)+1]
+}
+
+function hvalid(header) {
+  return (header === 0x0007564d)
+}
+
 function ByteWindow(props){
-  const [scroll,setScroll] = React.useState(0)
-
   if (!props.data) return null
-
-  function handleWheel(e){
-    const dir = e.deltaY > 0 ? 1 : -1
-    updateScroll(4*dir)
-  }
-
-  function updateScroll(delta) {
-    function clamp(val,min,max) {
-      if (val < min) return min
-      if (val > max) return max
-      return val
-    }
-
-    const newScroll = clamp(scroll+delta,0,(props.length/0x10)-props.lines)
-
-    setScroll(newScroll)
-  }
 
   return <tt>
     <table
       style={{
-        // overflowY:"auto",
-        // maxHeight:"16em",
+        overflowY:"auto",
+        maxHeight:`${props.lines}em`,
         display:"inline-block"
       }}
-      onWheel={handleWheel}
+      // onWheel={handleWheel}
     >
       <tbody>
         {
-          Array.from(Array(props.lines).keys())
+          // Array.from(Array(props.lines).keys())
+          // .map(addr => ({
+          //   lineStart:((addr+scroll)*0x10)+props.start,
+          // }))
+
+          Array.from(Array((props.length>>4)).keys())
           .map(addr => ({
-            lineStart:((addr+scroll)*0x10)+props.start,
+            lineStart:((addr)*0x10)+props.start,
           }))
           .map(line => ({
             ...line,
@@ -72,7 +72,7 @@ function ByteWindow(props){
           .map(line => 
             <tr key={line.lineStart}>
               <td
-                className='lineStart'
+                className='ByteTableLineStart'
               >
                 {hprint(line.lineStart,4)}
               </td>
@@ -91,6 +91,35 @@ function ByteWindow(props){
       </tbody>
     </table>
   </tt>
+}
+
+const sectionmap = [
+  {
+    start:0x0000,
+    length:0x1000,
+    alt:0x0000,
+  },
+  {
+    start:0x4000,
+    length:0x1000,
+    alt:0x9000,
+  },
+  {
+    start:0x5000,
+    length:0x2000,
+    alt:0xa000
+  },
+  {
+    start:0x7000,
+    length:0x2000,
+    alt:0xc000
+  },
+]
+
+const addrmap ={
+  preview:{
+    playerName:0x4c
+  }
 }
 
 function App() {
@@ -142,50 +171,66 @@ function App() {
           Parse
         </button>
       </div>
+
+      <tt>
+        <table>
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Header</th>
+              <th>Checksum</th>
+              <th>Valid</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              data ?
+                sectionmap
+                .map(section => ({
+                  ...section,
+                  checksum:checksum(data,section.start,section.length),
+                  header:header(data,section.start)
+                }))
+                .map(section => 
+                  <tr
+                    key={section.start}
+                  >
+                    <td>
+                      {hprint(section.start,4)}
+                    </td>
+                    <td>
+                      {
+                        hprint(section.header,8)
+                      }
+                    </td>
+                    <td>
+                      {hprint(section.checksum,8)}
+                    </td>
+                    <td>
+                      {
+                        (hvalid(section.header)) && (section.checksum & 0xFFFF)===0xFFFF ?
+                        "." : "!"
+                      }
+                    </td>
+                  </tr>
+                )
+              :
+              null
+            }
+          </tbody>
+        </table>
+      </tt>
       {
-        data ?
-          [
-            {
-              start:0x0000,
-              length:0x1000,
-              alt:0x0000,
-            },
-            {
-              start:0x4000,
-              length:0x1000,
-              alt:0x9000,
-            },
-            {
-              start:0x5000,
-              length:0x2000,
-              alt:0xa000
-            },
-            {
-              start:0x7000,
-              length:0x2000,
-              alt:0xc000
-            },
-          ].map(section => 
-            <div
-              key={section.start}
-            >
-              <div>
-                Checksum: {
-                  hprint( checksum(data,section.start,section.length), 8)
-                }
-              </div>
-              <div>
-                <ByteWindow 
-                  start={section.start}
-                  length={section.length}
-                  data={data}
-                  lines={8}
-                />
-              </div>
-            </div>
-          )
-        :
-        null
+        sectionmap.map(section => 
+          <div key={section.start}>
+            <ByteWindow
+              data={data}
+              start={section.start}
+              length={section.length}
+              lines={16}
+            />
+          </div>
+        )
       }
     </div>
   );

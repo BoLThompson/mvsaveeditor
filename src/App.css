@@ -1,13 +1,14 @@
 html{
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .App {
   /* text-align: center; */
-  background-color: #282c34;
+  background-color: #1a2a4b;
   min-height: 100vh;
   /* font-size: calc(10px + 2vmin); */
   color: white;
+  padding: .5em .5em .5em .5em;
 }
 
 .App-logo {

@@ -13,6 +13,10 @@ export default {
     const view = new Uint16Array(buffer);
     view[address>>1] = value
   },
+
+  endSwap: function(word16) {
+    return ((word16 & 0xFF00)>>8) | ((word16 & 0x00FF)<<8)
+  },
   
   hprint: function(v,width){
     if (typeof v === "number")

@@ -43,3 +43,11 @@
   border-bottom:none;
   background-color: var(--innercol);
 }
+
+.ByteInput.w1{
+  width:2ex
+}
+
+.ByteInput.w2{
+  width:2ex
+}

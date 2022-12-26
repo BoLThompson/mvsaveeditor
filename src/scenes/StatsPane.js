@@ -38,7 +38,7 @@ export default function StatsPane(props) {
               key={c.addr}
             >
               <td>
-                c.name
+                {c.name}
               </td>
               {
                 Object.entries(seireiDefs).map(s =>

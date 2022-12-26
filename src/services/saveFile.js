@@ -10,37 +10,40 @@ function useSave() {
 }
 
 function SaveProvider(props) {
-  const [file,setFile] = React.useState();
-  const [data,setData] = React.useState();
+  const [data,setData] = React.useState({
+    data:null
+  });
 
   const api = {
-    parse(){
-      if (!file) return
-  
+
+    // updateData(cb) {
+    //   let dst = new ArrayBuffer(data.byteLength)
+    //   new Uint8Array(dst).set(new Uint8Array(data))
+
+    //   cb(data,dst)
+
+    //   setData(dst)
+    // },
+
+    handleFileChange(e){
+      //exit if there's no input file
+      if (! e.target.files.length) 
+        return false
+      
+      const file = e.target.files[0];
+
       const reader = new FileReader();
   
       reader.onload = async ({target}) => {
-        setData(target.result)
+        console.log("got to the async")
+        console.log(target)
+        setData({
+          raw:target.result,
+          filename:file.name
+        })
       }
   
       reader.readAsArrayBuffer(file)
-    },
-
-    updateData(cb) {
-      let dst = new ArrayBuffer(data.byteLength)
-      new Uint8Array(dst).set(new Uint8Array(data))
-
-      cb(data,dst)
-
-      setData(dst)
-    },
-
-    handleFileChange(e){
-      if (e.target.files.length) {
-        const inputFile = e.target.files[0];
-
-        setFile(inputFile)
-      }
     },
 
     download(){
@@ -51,7 +54,7 @@ function SaveProvider(props) {
       )
       const link = document.createElement('a');
       link.href=url;
-      link.setAttribute('download',file.name)
+      link.setAttribute('download',data.filename)
       document.body.appendChild(link)
       link.click();
       link.parentNode.removeChild(link);
@@ -61,8 +64,7 @@ function SaveProvider(props) {
   return <SaveContext.Provider
     value={{
       ...api,
-      file:file,
-      data:data,
+      data:data.raw,
     }}
   >
     {props.children}

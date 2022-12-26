@@ -1,7 +1,7 @@
 import React from 'react';
 import {seireiDefs} from 'services/mvTables'
-import bf from 'services/byteFuncs'
 import { useSave } from 'services/saveFile';
+import ByteInput from 'components/ByteInput';
 
 const characterDefs = [
   {
@@ -45,22 +45,10 @@ export default function StatsPane(props) {
                   <th
                     key={s[0]}
                   >
-                    <ValueInput
-                      value={bf.read16(save.data,(c.addr+0x50)+s[0]*2)}
-                      onChange={e => {
-                        e.preventDefault()
-
-                        save.update(handle => {
-                          bf.write16(
-                            handle,
-                            (c.addr+0x50)+s[0]*2,
-                            e.target.value
-                          )
-                          
-                          return handle
-                        })
-                      }}
-                      type="number"
+                    <ByteInput
+                      addr={(c.addr+0x50)+s[0]*2}
+                      byteWidth={1}
+                      display="dec"
                     />
                   </th>
                 )
@@ -71,17 +59,4 @@ export default function StatsPane(props) {
       </tbody>
     </table>
   </tt>
-}
-
-function ValueInput(props) {
-  const len = String(props.value).length;
-
-  return <input
-    type="number"
-    value={typeof props.value === "undefined" ? "" : props.value}
-    style={{
-      width:`${len+1}em`
-    }}
-    onChange={props.onChange}
-  />
 }

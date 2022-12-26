@@ -2,6 +2,7 @@ import React from 'react';
 import { useSave } from 'services/saveFile';
 import bf from 'services/byteFuncs';
 import { portraitMap, decodeString } from 'services/mvTables';
+import ByteInput from 'components/ByteInput';
 
 export default function PreviewPane() {
   const save = useSave();
@@ -23,9 +24,10 @@ export default function PreviewPane() {
         <div
           key={item.addr}
         >
-          <input
-            value={bf.hprint(bf.read16(save.data,item.addr),item.byteWidth*2)}
-            className={`ByteInput w${item.byteWidth}`}
+          <ByteInput
+            addr={item.addr}
+            byteWidth={1}
+            display="dec"
           />
           <label htmlFor={item.addr}>
             {item.descr}
@@ -47,20 +49,12 @@ export default function PreviewPane() {
         <div
           key={addr}
         >
-          <select
-            value={bf.read16(save.data,addr)}
-          >
-            {
-              Object.entries(portraitMap).map(p => 
-                <option
-                  key={p[0]}
-                  value={p[0]}
-                >
-                  {p[1]}
-                </option>  
-              )
-            }
-          </select>
+          <ByteInput
+            addr={addr}
+            byteWidth={1}
+            display="select"
+            mapping={portraitMap}
+          />
         </div>
       )
     }

@@ -46,7 +46,7 @@ function SaveProvider(props) {
     },
 
     download(){
-      const blob = new Blob([new Uint8Array(data,0,data.byteLength)])
+      const blob = new Blob([new Uint8Array(data.raw,0,data.raw.byteLength)])
 
       const url = window.URL.createObjectURL(
         blob

@@ -5,6 +5,8 @@ import './MvSaveEditor.css'
 import PreviewPane from './PreviewPane';
 import RawPane from './RawPane';
 import NavBar from 'components/NavBar'
+import AmigoPane from './AmigoPane';
+import StatsPane from './StatsPane';
 
 const navitems = [
   {
@@ -14,15 +16,17 @@ const navitems = [
   },
   {
     link:"amigos",
-    text:"Amigos"
+    text:"Amigos",
+    render:<AmigoPane/>
   },
   {
     link:"party",
     text:"Party"
   },
   {
-    link:"inventory",
-    text:"Inventory"
+    link:"stats",
+    text:"Stats and Inventory",
+    render:<StatsPane/>
   },
   {
     link:"progress",

@@ -1,0 +1,14 @@
+.AmigoPane{
+  max-height: 20em;
+  overflow: auto;
+}
+
+.amigoNumber{
+  text-align: right;
+}
+.amigoSeireiLevel{
+  text-align: center;
+}
+.seireiChartEven{
+  background-color: rgba(0,0,0,.1);
+}

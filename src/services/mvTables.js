@@ -5,22 +5,25 @@ export const sectionmap = [
       start:0x0000,
       length:0x1000,
       alt:0x0000,
-      synLoc:0x890
+      synLoc:0x0e90,
     },
     {
       start:0x4000,
       length:0x1000,
       alt:0x9000,
+      synLoc:0x4004,
     },
     {
       start:0x5000,
       length:0x2000,
-      alt:0xa000
+      alt:0xa000,
+      synLoc:0x5004,
     },
     {
       start:0x7000,
       length:0x2000,
-      alt:0xc000
+      alt:0xc000,
+      synLoc:0x7004,
     },
   ]
   

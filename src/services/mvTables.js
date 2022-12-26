@@ -92,13 +92,120 @@ export const charmap = {
     0x0020:" ",
     0x0030:"X",
     0x0040:"➩",
-    0x0050:"P",
+    0x41:"A",0x42:"B",0x43:"C",0x44:"D",0x45:"E",
+    0x46:"F",0x47:"G",0x48:"H",0x49:"I",0x4a:"J",
+    0x4b:"K",0x4f:"L",0x4d:"M",0x4e:"N",0x4f:"O",
+    0x50:"P",0x51:"Q",0x52:"R",0x53:"S",0x54:"T",
+    0x55:"U",0x56:"V",0x57:"W",0x58:"X",0x59:"Y",
+    0x5a:"Z",
+    0x0744:"a",0x0745:"b",0x0746:"c",0x0747:"d",
+    0x0748:"e",0x0749:"f",0x074a:"g",0x074b:"h",
+    0x074c:"i",0x074d:"j",0x074e:"k",0x074f:"l",
+    0x0750:"m",0x0751:"n",0x0752:"o",0x0753:"p",
+    0x0754:"q",0x0755:"r",0x0756:"s",0x0757:"t",
+    0x0758:"u",0x0759:"v",0x075a:"w",0x075b:"x",
+    0x075c:"y",0x075d:"z",
     0x0060:"ぁ",
-    0x0070:"あ",
-    0x0080:"け",
+    0x70:"あ",0x71:"ア",0x72:"い",0x73:"イ",0x74:"う",0x75:"ウ",0x76:"え",0x77:"エ",0x78:"お",0x79:"オ",
+    0x7a:"か",0x7b:"カ",0x7c:"き",0x7d:"キ",0x7e:"く",0x7f:"ク",0x80:"け",0x81:"ケ",0x82:"こ",0x83:"コ",
+    0x84:"さ",0x85:"サ",0x86:"し",0x87:"シ",0x88:"す",0x89:"ス",0x8a:"せ",0x8b:"セ",0x8c:"そ",0x8d:"ソ",
+    0x8e:"た",0x8f:"タ",0x90:"ち",0x91:"チ",0x92:"つ",0x93:"ツ",0x94:"て",0x95:"テ",0x96:"と",0x97:"ト",
+    0x98:"な",0x99:"ナ",0x9a:"に",0x9b:"ニ",0x9c:"ぬ",0x9d:"ヌ",0x9e:"ね",0x9f:"ネ",0xa0:"の",0xa1:"ノ",
+    0xa2:"は",0xa3:"ハ",0xa4:"ひ",0xa5:"ヒ",0xa6:"ふ",0xa7:"フ",0xa8:"へ",0xa9:"ヘ",0xaa:"ほ",0xab:"ホ",
+    0xac:"ま",0xad:"マ",0xae:"み",0xaf:"ミ",0xb0:"む",0xb1:"ム",0xb2:"め",0xb3:"メ",0xb4:"も",0xb5:"モ",
+    0xb6:"や",0xb7:"ヤ",0xb8:"ゆ",0xb9:"ユ",0xba:"よ",0xbb:"ヨ",
+    0xbc:"ら",0xbd:"ラ",0xbe:"り",0xbf:"リ",0xc0:"る",0xc1:"ル",0xc2:"れ",0xc3:"レ",0xc4:"ろ",0xc5:"ロ",
+    0xc6:"わ",0xc7:"ワ",0xc8:"を",0xc9:"ヲ",0xca:"ん",0xcb:"ン",
+    0xcc:"ゔ",0xcd:"ヴ",
+    0xce:"が",0xcf:"ガ",0xd0:"ぎ",0xd1:"ギ",0xd2:"ぐ",0xd3:"グ",0xd4:"げ",0xd5:"ゲ",0xd6:"ご",0xd7:"ゴ",
+    0xd8:"ざ",0xd9:"ザ",0xda:"じ",0xdb:"ジ",0xdc:"ず",0xdd:"ズ",0xde:"ぜ",0xdf:"ゼ",0xe0:"ぞ",0xe1:"ゾ",
+
     0x043f:"豆",
     0x04ae:"腐",
   }
+
+export const seireiDefs = [
+  {
+    kanji:'火',
+    elem:"Fire",
+    name:"Toasty",
+  },
+  {
+    kanji:'風',
+    elem:"Wind",
+    name:"Air",
+  },
+  {
+    kanji:'毒',
+    elem:'Poison',
+    name:"Boo",
+  },
+  {
+    kanji:'美',
+    elem:"Beauty",
+    name:"Powder"
+  },
+  {
+    kanji:'刃',
+    elem:'Blade',
+    name:'Slash',
+  },
+  {
+    kanji:'音',
+    elem:"Sound",
+    name:"Hamming"
+  },
+  {
+    kanji:'石',
+    elem:"Stone",
+    name:"Flint"
+  },
+  {
+    kanji:'虫',
+    elem:'Bug',
+    name:'Buzz'
+  },
+  {
+    kanji:'木',
+    elem:"Wood",
+    name:"Stick"
+  },
+  {
+    kanji:'獣',
+    elem:"Beast",
+    name:"Gar"
+  },
+  {
+    kanji:'水',
+    elem:"Water",
+    name:"Flow",
+  },
+  {
+    kanji:'雷',
+    elem:'Lightning',
+    name:'Tesla'
+  },
+  {
+    kanji:'古',
+    elem:'Ancient',
+    name:'Clock'
+  },
+  {
+    kanji:'闇',
+    elem:"Darkness",
+    name:"Nerve"
+  },
+  {
+    kanji:"光",
+    elem:"Light",
+    name:"Lux",
+  },
+  {
+    kanji:"愛",
+    elem:"Love",
+    name:"Wish"
+  }
+]
 
 export function decodeString(buffer,addr,maxLength) {
   let str = ""
@@ -118,9 +225,6 @@ export function decodeString(buffer,addr,maxLength) {
 //78 - 7f party member count, location
 //70 - 77 contains bura, playtime
 //16x78 - location?
-//6a - amigo count? not very responsive though
-//6c - amigo 1 fire seirei level?
-//78 - amigo 1's assigned party member?
 
 //16x7a is party size (includes protag)
 //16x0e is protagonist's portrait
@@ -130,6 +234,21 @@ export function decodeString(buffer,addr,maxLength) {
 //16x32 is party member 3's portrait
 //16x3e is party member 4's portrait
 //16x4a is party member 5's portrait
+
+//0x0004 probably player's level
+//0x005c onwards is strangely related to the protag's unlocked magics. Accepted values are 01 and... the correct level of that magic?
+//0x0008 is current hp
+//0x000c is current MP
+//0x006d is the character type
+  //0 for mprotag
+  //1a for fdark (requires all seirei to be learned except light)
+//16x0074 is bura (preview only :/)
+//0x0080 first amigo's name
+  //amigo data is 0x25 bytes wide
+  //+8 = bit 0 is enable, disable. >> 1 =index of the friend it's set to
+    //this uses a different index than the portraits
+
+//16x5180 is the protagonist's actual fire seirei level.
 
 //area name is indexed
 //suspect that 8x1a is the number of registered amigos

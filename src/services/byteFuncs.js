@@ -9,6 +9,11 @@ export default {
     return view[address>>1]
   },
   
+  write8: function(buffer,address,value) {
+    const view = new Uint8Array(buffer);
+    view[address] = value
+  },
+  
   write16: function(buffer,address,value) {
     const view = new Uint16Array(buffer);
     view[address>>1] = value

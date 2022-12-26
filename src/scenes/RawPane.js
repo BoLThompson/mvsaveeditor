@@ -92,45 +92,44 @@ function Integrity(){
       <tbody>
         {
           save.data ?
-            sectionmap
-            .map(section => ({
-              ...section,
-              checksum:bf.checksum(save.data,section.start,section.length),
-              header:bf.header(save.data,section.start)
-            }))
-            .map(section => 
+            Object.entries(sectionmap)
+            .map(s => 
               <tr
-                key={section.start}
+                key={s[0]}
               >
                 <td>
-                  {bf.hprint(section.start,4)}
+                  {bf.hprint(s[1].start,4)}
+                </td>
+                <td>
+                  {bf.hprint(save.headers[s[0]],8)}
+                </td>
+                <td>
+                  {bf.hprint(save.checksums[s[0]],8)}
                 </td>
                 <td>
                   {
-                    bf.hprint(section.header,8)
-                  }
-                </td>
-                <td>
-                  {bf.hprint(section.checksum,8)}
-                </td>
-                <td>
-                  {
-                    (bf.hvalid(section.header)) && (section.checksum & 0xFFFF)===0xFFFF ?
-                    "." : "!"
+                    bf.hvalid(save.headers[s[0]]) &
+                    ! ((save.checksums[s[0]] & 0xFFFF) ^ 0xFFFF)
+                    ?
+                    "Yes"
+                    :
+                    "No"
                   }
                 </td>
                 <td>
                   <button
                     onClick={()=>{
-                      const diff = 0xffff - (section.checksum & 0xffff)
-                      const syndrome = bf.read16(save.data,section.synLoc)
+                      const diff = 0xffff - (save.checksums[s[0]] & 0xffff)
+                      const syndrome = bf.read16(save.data,s[1].synLoc)
                       
-                      save.updateData((src,dst) => {
+                      save.update(handle => {
                         bf.write16(
-                          dst,
-                          section.synLoc,
+                          handle,
+                          s[1].synLoc,
                           syndrome+diff
                         )
+
+                        return handle
                       })
                     }}
                   >

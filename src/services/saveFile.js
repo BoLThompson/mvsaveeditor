@@ -59,11 +59,11 @@ function SaveProvider(props) {
       link.parentNode.removeChild(link);
     },
 
-    update(cb) {
+    update(callback) {
       let dst = new ArrayBuffer(data.raw.byteLength)
       new Uint8Array(dst).set(new Uint8Array(data.raw))
 
-      const newRaw = cb(dst)
+      const newRaw = callback(dst)
 
       readFile(newRaw)
     },

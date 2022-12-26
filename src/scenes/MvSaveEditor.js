@@ -84,13 +84,6 @@ function FilePanel() {
         name="save"
         type="File"
       />
-      <button
-        onClick={save.parse}
-      >
-        {
-          save.data ? "Reread" : "Parse"
-        }
-      </button>
     </div>
     <button
       onClick={save.download}

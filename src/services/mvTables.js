@@ -87,6 +87,12 @@ export const portraitMap = [
     /*0x38*/"rock triclops?",
     /*0x39*/"toasty",
     /*0x3a*/"flow",
+    /*0x3b*/"flint",
+    /*0x3c*/"air",
+    /*0x3d*/"lux",
+    /*0x3e*/"nerve",
+    /*0x3f*/"wish",
+    //everything? beyond this point is just more basic MDs
   ]
   
 export const charmap = {

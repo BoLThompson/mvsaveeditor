@@ -45,7 +45,23 @@ export default function StatsPane(props) {
                   <th
                     key={s[0]}
                   >
-                    {bf.read16(save.data,(c.addr+0x50)+s[0]*2)}
+                    <ValueInput
+                      value={bf.read16(save.data,(c.addr+0x50)+s[0]*2)}
+                      onChange={e => {
+                        e.preventDefault()
+
+                        save.update(handle => {
+                          bf.write16(
+                            handle,
+                            (c.addr+0x50)+s[0]*2,
+                            e.target.value
+                          )
+                          
+                          return handle
+                        })
+                      }}
+                      type="number"
+                    />
                   </th>
                 )
               }
@@ -55,4 +71,17 @@ export default function StatsPane(props) {
       </tbody>
     </table>
   </tt>
+}
+
+function ValueInput(props) {
+  const len = String(props.value).length;
+
+  return <input
+    type="number"
+    value={typeof props.value === "undefined" ? "" : props.value}
+    style={{
+      width:`${len+1}em`
+    }}
+    onChange={props.onChange}
+  />
 }

@@ -50,29 +50,6 @@ export default function RawPane() {
       element:<Navigate to="section1" replace/>
     }
   ])
-  
-  // return <div
-  //   style={{
-  //     display:'flex',
-  //     gap:'2em'
-  //   }}
-  // >
-  //   <div>
-      
-  //     {
-  //       sectionmap.map(section => 
-  //         <div key={section.start}>
-  //           <ByteWindow
-  //             data={save.data}
-  //             start={section.start}
-  //             length={section.length}
-  //             lines={16}
-  //           />
-  //         </div>
-  //       )
-  //     }
-  //   </div>
-  // </div>
 }
 
 function Integrity(){

@@ -231,7 +231,6 @@ export function decodeString(buffer,addr,maxLength) {
   return str
 }
 
-//78 - 7f party member count, location
 //70 - 77 contains bura, playtime
 //16x78 - location?
 
@@ -259,6 +258,23 @@ export function decodeString(buffer,addr,maxLength) {
 
 //16x5180 is the protagonist's actual fire seirei level.
 
-//area name is indexed
+//area name is indexed at 16x78
+  //16x400c is the room you'll load in to
 //suspect that 8x1a is the number of registered amigos
 //suspect that 8x92 is amigo1's fire spirit level, each spirit following suit
+
+//0x4210 looks to be the start of actor data for the room you saved in
+  //don't fucking touch this
+
+//0x513e changed after a battle
+//  so did 0x5204
+//editing 0x5267 changed kirsche's current health, he was party slot 2
+//0x517c is related to protag experience points
+//16x5210 the number of fire spells the protagonist has learned
+//16x5200 - each word here is a spell equipped to the protagonist
+//  0x513b   0x0513a
+/* :XXXXXXXX XXXXXXXX XXXXXXXXX
+    |||||||| ||||||\\_ protagonist's level << 2
+    |||||||| |
+    \\\\\\\\ \________ protagonist's current HP?
+*/

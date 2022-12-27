@@ -69,6 +69,7 @@ export default function ByteInput(props) {
         border:"none",
         background:'none'
       }}
+      title={bf.hprint(props.addr,4)}
       className={props.className}
       value={value}
       onChange={t.handleChange}

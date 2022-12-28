@@ -103,7 +103,7 @@ export const charmap = {
     0x0040:"➩",
     0x41:"A",0x42:"B",0x43:"C",0x44:"D",0x45:"E",
     0x46:"F",0x47:"G",0x48:"H",0x49:"I",0x4a:"J",
-    0x4b:"K",0x4f:"L",0x4d:"M",0x4e:"N",0x4f:"O",
+    0x4b:"K",0x4c:"L",0x4d:"M",0x4e:"N",0x4f:"O",
     0x50:"P",0x51:"Q",0x52:"R",0x53:"S",0x54:"T",
     0x55:"U",0x56:"V",0x57:"W",0x58:"X",0x59:"Y",
     0x5a:"Z",
@@ -231,6 +231,46 @@ export function decodeString(buffer,addr,maxLength) {
   return str
 }
 
+export const inventoryMap = [
+  {
+    addr:0x7e5a,
+    name:"Gummy Frogs (Green)"
+  },
+  {
+    addr:0x7e56,
+    name:"Gummy Frogs (Blue)"
+  },
+  {
+    addr:0x7e60,
+    name:"Gummy Worms (Yellow)"
+  },
+  {
+    addr:0x8026,
+    name:"Pinecone"
+  },
+]
+
+export const reportCardMap = [
+  {
+    addr:0x8084,  //also 0x8088 for some reason?
+    name:"Battles Fought"
+  },
+  {
+    addr:0x41a6,
+    name:"Frogs Caught"
+  },
+  {
+    addr:0x41b0,
+    name:"Worms Caught"
+  },
+  {
+    addr:0x41ae,
+    name:"Pinecones picked up"
+  },
+]
+
+//16x7e00 or thereabouts seems to set party information
+
 //70 - 77 contains bura, playtime
 //16x78 - location?
 
@@ -277,13 +317,9 @@ export function decodeString(buffer,addr,maxLength) {
 //0x6076 was pistachio's exp, party slot 4
   //so was 0x60b8
   //0x6077 was his HP
-//changing 0x8026 effected my pinecone inventory count
-//changing 0x7e5a effected green gummy frog inventory count
 
-//0x8084 is the battle count in the report card
-  //0x8088 seems to match that number?
 
-//16x41AF: report card pinecones
+
 //0x517c is related to protag experience points
 //16x5210 the number of fire spells the protagonist has learned
 //16x5200 - each word here is a spell equipped to the protagonist

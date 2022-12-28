@@ -268,7 +268,21 @@ export function decodeString(buffer,addr,maxLength) {
 
 //0x513e changed after a battle
 //  so did 0x5204
+//  so did 0x52a8
+//  so did 16x7e24
+//  so did 16x80a0
 //editing 0x5267 changed kirsche's current health, he was party slot 2
+//editing 0x5e1f changed arancia's current health, she was party slot 3
+  //0x5e60 changed her exp
+//0x6076 was pistachio's exp, party slot 4
+  //so was 0x60b8
+  //0x6077 was his HP
+//changing 0x8026 effected my pinecone inventory count
+//changing 0x7e5a effected green gummy frog inventory count
+
+//0x8084 is the battle count in the report card
+  //0x8088 seems to match that number?
+
 //0x517c is related to protag experience points
 //16x5210 the number of fire spells the protagonist has learned
 //16x5200 - each word here is a spell equipped to the protagonist

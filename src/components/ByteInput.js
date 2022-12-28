@@ -30,7 +30,7 @@ export default function ByteInput(props) {
         const str = e.target.value ? e.target.value : "0"
         const nV = parseInt(str,16)
     
-        if (nV !== NaN)
+        if (! isNaN(nV))
           save.update(handle => {
             writefunc(handle,props.addr,nV)
             return handle
@@ -48,7 +48,7 @@ export default function ByteInput(props) {
         const str = e.target.value ? e.target.value : "0"
         const nV = parseInt(str)
     
-        if (nV !== NaN)
+        if (!isNaN(nV))
           save.update(handle => {
             writefunc(handle,props.addr,nV)
             return handle

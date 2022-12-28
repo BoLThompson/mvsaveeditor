@@ -67,7 +67,8 @@ export default function ByteInput(props) {
         width:t.width,
         font:'inherit',
         border:"none",
-        background:'none'
+        background:'none',
+        textAlign:'center',
       }}
       title={bf.hprint(props.addr,4)}
       className={props.className}

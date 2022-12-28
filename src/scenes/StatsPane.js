@@ -22,11 +22,16 @@ export default function StatsPane(props) {
           </th>
           {
             seireiDefs.map(s => 
-              <th
+              <React.Fragment
                 key={s.kanji}
               >
-                {s.kanji}
-              </th>  
+                <th>
+                  {s.kanji}
+                </th>
+                <th>
+                  魔
+                </th>
+              </React.Fragment>
             )
           }
         </tr>
@@ -42,15 +47,24 @@ export default function StatsPane(props) {
               </td>
               {
                 Object.entries(seireiDefs).map(s =>
-                  <th
+                  <React.Fragment
                     key={s[0]}
                   >
-                    <ByteInput
-                      addr={(c.addr+0x50)+s[0]*2}
-                      byteWidth={1}
-                      display="dec"
-                    />
-                  </th>
+                    <td>
+                      <ByteInput
+                        addr={(c.addr+0x50)+s[0]*2}
+                        byteWidth={1}
+                        display="dec"
+                      />
+                    </td>
+                    <td>
+                      <ByteInput
+                        addr={0x5210+s[0]*2}
+                        byteWidth={1}
+                        display="dec"
+                      />
+                    </td>
+                  </React.Fragment>
                 )
               }
             </tr>

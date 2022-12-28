@@ -283,6 +283,7 @@ export function decodeString(buffer,addr,maxLength) {
 //0x8084 is the battle count in the report card
   //0x8088 seems to match that number?
 
+//16x41AF: report card pinecones
 //0x517c is related to protag experience points
 //16x5210 the number of fire spells the protagonist has learned
 //16x5200 - each word here is a spell equipped to the protagonist
